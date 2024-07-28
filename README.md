@@ -1,4 +1,4 @@
-# Redis Rebus Error Tracker
+# Rebus distribuited Saga Exclusive Access Lock with Redis
 
 This repository provides a Rebus implementation of saga exclusive access lock using Redis.
 
