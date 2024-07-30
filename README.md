@@ -10,8 +10,8 @@ With mongo you want to avoid concurrency exceptions during saga processing, so y
 
 With default EnforceExclusiveSagaAccessIncomingStepBase, having a simple "sagalock_{sagaId}" would be very unsafe because if you're sharing same redis connection from multiple microservices.
 
-In this repo there is basically a COPY of the private class _EnforceExclusiveSagaAccessIncomingStepBase_ from Rebus original repository, BUT with a safe lock key based on saga full type name _$"{lockPrefix}:{a.SagaType}:{a.CorrelationPropertyValue}"_
-e.g. "prefix:namespace+sagaClassName:SagaId"
+In this repo there is basically a COPY of the private class _EnforceExclusiveSagaAccessIncomingStepBase_ from Rebus original repository, BUT with a safe lock key based on saga full type name _$"{lockPrefix}:{a.SagaType}:{a.CorrelationPropertyName}:{a.CorrelationPropertyValue}"_
+e.g. "prefix:namespace+sagaClassName:SagaId:123"
 
 [![QA Build](https://github.com/pfab-io/RebusRedisExclusiveAccessLock/actions/workflows/dotnet.yml/badge.svg)](https://github.com/pfab-io/RebusRedisExclusiveAccessLock/actions/workflows/dotnet.yml)
 

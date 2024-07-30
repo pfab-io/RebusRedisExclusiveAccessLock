@@ -52,7 +52,7 @@ public class RedisExclusiveSagaAccessIncomingStep(
                 CorrelationPropertyName = a.correlationProperty.PropertyName,
                 CorrelationPropertyValue = a.correlationProperty.GetValueFromMessage(messageContext, message)
             })
-            .Select(a => $"{lockPrefix}:{a.SagaType}:{a.CorrelationPropertyValue}")
+            .Select(a => $"{lockPrefix}:{a.SagaType}:{a.CorrelationPropertyName}:{a.CorrelationPropertyValue}")
             .Distinct() // avoid accidentally acquiring the same lock twice, because a bucket got hit more than once
             .OrderBy(str => str) // enforce consistent ordering to avoid deadlocks
             .ToArray();
